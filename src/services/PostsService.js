@@ -54,6 +54,14 @@ async getPostsBySearch(query){
   AppState.searchPosts = res.data.posts
 }
 
+async deletePost(postId){
+  if(!AppState.account){
+      throw new Error('Did you make this?')
+  }
+  const res = await api.delete(`api/posts/${postId}`)
+  AppState.posts = AppState.posts.filter(p => p.id != postId)
+}
+
 }
 
 

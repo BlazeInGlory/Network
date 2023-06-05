@@ -14,7 +14,7 @@
     <div class="row">
       <div class="col-8 offset-2 my-4" v-for="p in searchPosts" :key="p.id">
       </div>
-      <PostsCard :postsProp="p"/>
+      <!-- <PostsCard :postsProp="p"/> -->
     </div>
   </section>
 </template>
