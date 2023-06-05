@@ -13,8 +13,8 @@
   <section class="container">
     <div class="row">
       <div class="col-8 offset-2 my-4" v-for="p in searchPosts" :key="p.id">
+        <PostsCard :postsProp="p"/>
       </div>
-      <!-- <PostsCard :postsProp="p"/> -->
     </div>
   </section>
 </template>
