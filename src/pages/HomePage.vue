@@ -9,7 +9,7 @@
     <form @submit.prevent="createPosts()">
       <div class="mb-3">
         <label for="" class="form-label">Comment</label>
-        <input type="text" class="form-control" id="forms" aria-describedby="emailHelp">
+        <input v-model="editable.body" type="text" class="form-control" id="forms" aria-describedby="emailHelp">
       </div>
       <button type="submit" class="btn btn-primary">Post it!</button>
     </form>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { computed, onMounted } from "vue"
+import { computed, onMounted, ref } from "vue"
 import { AppState } from "../AppState.js"
 import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
@@ -70,25 +70,28 @@ export default {
                 Pop.toast(error.message, "error");
             }
         }
+        const editable = ref({})
         onMounted(() => {
             getPosts();
             // getBillboards();
         });
 
         return {
+          editable,
             posts: computed(() => AppState.posts),
             previousUrl: computed(() => AppState.previousPageUrl),
             nextUrl: computed(() => AppState.nextPageUrl),
 
       async createPosts(){
         try {
-          let form = window.event.target
-          let newPost = {
-            body: form.imgUrl.value
-          }
+          const newPost = editable.value
+          // let form = window.event.target
+          // let newPost = {
+          //   body: form.imgUrl?.value
+          // }
           await postsService.createPosts(newPost)
           Pop.success('Post successful')
-          form.reset()
+          // form.reset()
         } catch (error) {
           Pop.error('Gotta log in bucko', error)
         }

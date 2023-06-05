@@ -59,7 +59,8 @@ setup() {
   const editable = ref({})
 
   watchEffect(() => {
-      if(!AppState.account) {return}
+      if(!AppState.account) 
+      {return}
       editable.value = {...AppState.account}
   })
 

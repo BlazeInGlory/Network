@@ -43,20 +43,20 @@ export default {
             AppState: computed(() => AppState),
             Billboards: computed(() => AppState.billboards),
             
-            async createPost(){
-              try {
-                let form = window.event.target
-                let newPost = {
-                  body: form.body.value,
-                  imgUrl: form.imgUrl.value
-                }
-                await postsService.createPost(newPost)
-                form.reset()
-              } catch (error) {
-                logger.error('creating post?', error)
-                Pop.error('Log in first bucko', error)
-              }
-            }
+            // async createPost(){
+            //   try {
+            //     let form = window.event.target
+            //     let newPost = {
+            //       body: form.body.value,
+            //       imgUrl: form.imgUrl.value
+            //     }
+            //     await postsService.createPost(newPost)
+            //     form.reset()
+            //   } catch (error) {
+            //     logger.error('creating post?', error)
+            //     Pop.error('Log in first bucko', error)
+            //   }
+            // }
     }
   },
   components: { Billboards }
