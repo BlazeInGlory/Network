@@ -1,12 +1,12 @@
 <template>
   <!-- hello from the post card -->
   
- <div class="d-flex">
+ <div class="d-flex row">
         <img class="img-fluid col-2" :src="postsProp?.imgUrl" alt="">
         <p class="col-2">{{ postsProp?.creator.name }}</p>
-        <p class="col-2">{{postsProp?.createdAt}}</p>
-        <p class="col-4">{{postsProp?.body}}</p>
-        <button @click="likePost(postProp)" class="btn btn-primary">Likes:{{ postsProp?.likeIds.length }}</button>
+        <p class="col-1">{{postsProp?.createdAt}}</p>
+        <p class="col-5">{{postsProp?.body}}</p>
+        <button @click="likePost(postProp)" class="btn btn-primary col-2">Likes:{{ postsProp?.likeIds.length }}</button>
         <!-- <p class="col-1">{{ postsProp?.likeIds.length }}</p> -->
         <!-- <div class="text-center" v-if="post.profile.id == account.id">
                 <button class="btn btn-danger mb-3" @click="deletePost(post)">Delete</button>
