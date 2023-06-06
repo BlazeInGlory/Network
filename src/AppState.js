@@ -10,10 +10,10 @@ export const AppState = reactive({
   /** @type {import('./models/Posts.js').Posts[]} */
   posts: [],
 
-  /** @type {import('./models/Posts.js').Posts[]} */
+  /** @type {import('./models/Account.js').Account[]} */
   previousPageUrl: [],
 
-  /** @type {import('./models/Posts.js').Posts[]} */
+  /** @type {import('./models/Account.js').Account[]} */
   nextPageUrl: [],
 
   /**@type {import('./models/.Billboards.js').Billboards[]} */
@@ -24,7 +24,14 @@ export const AppState = reactive({
 
     /**@type {import('./models/Posts.js').Post[]} */
     searchPosts: [],
-    
+
      /**@type {import('./models/Profile.js').Profile} */
   activeProfile: null,
-})
+
+ /**@type {import('./models/Posts.js').Posts[]} */
+  nextPageProfile: null,
+
+  /**@type {import('./models/Posts.js').Posts[]} */
+  previousPageProfile: null,
+
+});

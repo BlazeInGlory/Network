@@ -2,16 +2,22 @@
   <!-- hello from the post card -->
   
  <div class="d-flex row">
+   <!-- <img class="col-2 img-fluid" :src="postsProp?.creator.picture" alt=""> -->
         <img class="img-fluid col-2" :src="postsProp?.imgUrl" alt="">
-        <p class="col-2">{{ postsProp?.creator.name }}</p>
-        <img class="img-fluid" :src="postsProp?.creator.picture" alt="">
-        <p class="col-1">{{postsProp?.createdAt}}</p>
-        <p class="col-5">{{postsProp?.body}}</p>
-        <button @click="likePost(postProp)" class="btn btn-primary col-2">Likes:{{ postsProp?.likeIds.length }}</button>
+        <p>{{ postsProp?.creator.name }}</p>
+        <span class="">- {{new Date(postsProp?.createdAt).toLocaleDateString('en-US', {
+                month: 'short', day: 'numeric', year: 'numeric'
+            })}}</span>
+        <p>{{postsProp?.body}}</p>
+        <button @click="likePost(postsProp)" class="btn btn-primary col-2">Likes:{{ postsProp?.likeIds.length }}</button>
         <div class="text-center" v-if="postsProp?.creator.id == account.id">
                 <button class="btn btn-danger mb-3" @click="deletePost(postsProp)">Delete</button>
             </div>
-        
+            <div>
+            <router-link :to="{ name: 'Profile', params: { profileId: postsProp?.creator.id } }">
+            <img class="profile-img selectable rounded-circle" :src="postsProp?.creator.picture">
+            </router-link>
+          </div>
       </div>
 </template>
 
@@ -34,7 +40,7 @@ export default {
         try {
           logger.log('deleting post', post)
             if(post.creator.id !== AppState.account.id){
-                throw new Error('You must be the creator of this post to delete it.')
+                throw new Error('Did you create this?')
             }
             const yes = await Pop.confirm('Delete The Post?')
             if(!yes) {return}
@@ -44,20 +50,29 @@ export default {
             Pop.error(error)
         }
     },
-        async likePost(postProp){
+        async likePost(postsProp){
           try {
             if(!AppState.account){
-              throw new Error('Gotta log in bucko')
+              throw new Error('Gotta log in')
             }
-            await postsService.likePost(postProp?.id)
+            await postsService.likePost(postsProp?.id)
           } catch (error) {
-            logger.error(error)
-            Pop.error('Gotta log in Bucko', error)
+            logger.log('liking post')
+            Pop.error('Gotta log in', error)
           }
         }
       };
   },
 };
 </script>
+<style>
+.post-img {
+    width: 100%;
+    max-height: 400px;
+}
 
-<style></style>
+.profile-img {
+    width: 40px;
+    height: 40px;
+}
+</style>

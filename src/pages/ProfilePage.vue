@@ -14,10 +14,16 @@
     <div class="container">
       <div class="row">
         <div class="col-8 offset-2 my-4" v-for="p in posts" :key="p.id">
-          <PostCard :post="p"/>
+          <PostsCard :postsProp="p"/>
         </div>
       </div>
       <div class="row text-center mb-4">
+        <div class="col-6">
+        <button class="btn btn-info" @click="changePageProfile(previousPageProfile)" :disabled="!previousPageProfile">Previous</button>
+      </div>
+      <div class="col-6">
+        <button class="btn btn-info px-4" @click="changePageProfile(nextPageProfile)" :disabled="!nextPageProfile">Next</button>
+      </div>
     </div>
     </div>
   </div>

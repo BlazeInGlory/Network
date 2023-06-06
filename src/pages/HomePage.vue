@@ -33,7 +33,7 @@
     <button :disabled="!nextUrl" @click="changePage(nextUrl)" class="btn btn-light">Next</button>
   </div>
 
-  <div v-for="(p, index) in posts" :key="index">
+  <!-- <div v-for="(p, index) in posts" :key="index">
     <div class="m-3">
       <h3>
         {{ p.name }}
@@ -42,7 +42,7 @@
     </div>
 
 
-  </div>
+  </div> -->
 </template>
 
 <script>
