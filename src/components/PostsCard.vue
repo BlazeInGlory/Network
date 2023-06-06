@@ -4,17 +4,17 @@
  <div class="d-flex row">
    <!-- <img class="col-2 img-fluid" :src="postsProp?.creator.picture" alt=""> -->
         <img class="img-fluid col-2" :src="postsProp?.imgUrl" alt="">
-        <p>{{ postsProp?.creator.name }}</p>
+        <p>{{ postsProp?.creator?.name }}</p>
         <span class="">- {{new Date(postsProp?.createdAt).toLocaleDateString('en-US', {
                 month: 'short', day: 'numeric', year: 'numeric'
             })}}</span>
         <p>{{postsProp?.body}}</p>
         <button @click="likePost(postsProp)" class="btn btn-primary col-2">Likes:{{ postsProp?.likeIds.length }}</button>
-        <div class="text-center" v-if="postsProp?.creator.id == account.id">
+        <div class="text-center" v-if="postsProp?.creator?.id == account.id">
                 <button class="btn btn-danger mb-3" @click="deletePost(postsProp)">Delete</button>
             </div>
             <div>
-            <router-link :to="{ name: 'Profile', params: { profileId: postsProp?.creator.id } }">
+            <router-link :to="{ name: 'Profile', params: { profileId: postsProp?.creator?.id } }">
             <img class="profile-img selectable rounded-circle" :src="postsProp?.creator.picture">
             </router-link>
           </div>
@@ -28,6 +28,7 @@ import { logger } from '../utils/Logger.js'
 import { postsService } from "../services/PostsService.js";
 import { computed } from "vue";
 import Pop from "../utils/Pop.js";
+
 export default {
   props: {
       postsProp: { type: Object, required: true }

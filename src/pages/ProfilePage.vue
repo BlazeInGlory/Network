@@ -76,8 +76,19 @@ setup() {
     account: computed(() => AppState.account),
     profile: computed(() => AppState.activeProfile),
     posts: computed(() => AppState.profilePosts),
+    nextPageProfile: computed(() => AppState.nextPageProfile),
+    previousPageProfile: computed(() => AppState.previousPageProfile),
+
+    async changePageProfile(url) {
+        try {
+          await postsService.changePageProfile(url)
+        } catch (error) {
+          logger.error('Changing Page', error)
+          Pop.error(error)
+        }
+      }
   }
-}
+  }
 }
 </script>
 

@@ -8,8 +8,8 @@ class PostsService {
     const res = await api.get('api/posts')
     logger.log('[getting posts]', res.data)
     AppState.posts = res.data.posts
-    AppState.newer = res.data.newer
-    AppState.older = res.data.older
+    AppState.nextPageUrl = res.data.older
+    AppState.previousPageUrl = res.data.newer
   }
 
   async getPostsByCreatorId(creatorId) {
@@ -24,8 +24,8 @@ class PostsService {
     const res = await api.get(url)
     // logger.log(res.data);
     AppState.posts = res.data.posts
-    AppState.older = res.data.older
-    AppState.newer = res.data.newer
+    AppState.nextPageUrl = res.data.older
+    AppState.previousPageUrl = res.data.newer
   }
 
   async createPosts(postData) {
